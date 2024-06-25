@@ -8,7 +8,7 @@ namespace POS.Core.Models
 {
     public class UnitModel
     {
-        public int UnitId { get; set; }
-        public int UnitName { get; set; }
+       // public int? UnitId { get; set; }
+        public string UnitName { get; set; }=string.Empty;
     }
 }

@@ -1,4 +1,5 @@
 using Microsoft.Data.SqlClient;
+using POS.API.Configurations;
 using System.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IDbConnection>(sp => new SqlConnection(builder.Configuration.GetConnectionString("defaultcon")));
+builder.Services.AddPosServices();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
