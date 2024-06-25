@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using POS.Core.Models;
+using POS.Data.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -20,7 +21,7 @@ namespace POS.Data.Repository
             var dp = new DynamicParameters();
             dp.Add("@UnitName", unitModel.UnitName);
             var userInfoModel = await _dbConnection.QueryFirstOrDefaultAsync<int>(
-                    sql: "UnitMasterInsertDetails",
+                    sql: StoredProcedure.UnitMasterInsertDetails,
                     param: dp,
                     commandType: CommandType.StoredProcedure);
 
