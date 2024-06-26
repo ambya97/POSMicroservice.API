@@ -1,4 +1,5 @@
 ﻿using POS.Core.Models;
+using POS.Core.Models.Unit;
 using POS.Service;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,12 @@ namespace POS.Business
         public UnitManager(IUnitService unitService) {
             _unitService = unitService; 
         }
+
+        public async Task<IReadOnlyList<GetUnitModel>> GetUnitMstDetails()
+        {
+            return await _unitService.GetUnitMstDetails();
+        }
+
         public async Task<int> UnitMasterInsertDetails(UnitModel unitModel)
         {
             return await _unitService.UnitMasterInsertDetails(unitModel);

@@ -1,4 +1,5 @@
 ﻿using POS.Core.Models;
+using POS.Core.Models.Unit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace POS.Service
     public interface IUnitService
     {
         Task<int> UnitMasterInsertDetails(UnitModel unitModel);
+        Task<IReadOnlyList<GetUnitModel>> GetUnitMstDetails();
     }
 }

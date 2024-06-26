@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Azure;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using POS.Business;
 using POS.Core.Common;
@@ -19,8 +20,8 @@ namespace POS.API.Controllers
         {
             _unitManager = unitManager;
         }
-        [HttpPost("")]
-        public async Task<ResultModel> UnitMasterInsertDetails(UnitModel unitModel)
+        [HttpPost("UnitMasterInsertDetails")]
+        public async Task<ResultModel> UnitMasterInsertDetails([FromBody]  UnitModel unitModel)
         {
             try
             {
@@ -42,6 +43,29 @@ namespace POS.API.Controllers
                         Data = responseid
                     };
                 }
+            }
+            catch (Exception ex)
+            {
+                return new ResultModel()
+                {
+                    Code = HttpStatusCode.InternalServerError,
+                    Message = ex.Message,
+                    Data = string.Empty
+                };
+            }
+        }
+        [HttpGet("GetUnitMstDetails")]
+        public async Task<ResultModel> GetUnitMstDetails()
+        {
+            try
+            {
+                var response =await _unitManager.GetUnitMstDetails();
+                return new ResultModel()
+                {
+                    Code = HttpStatusCode.Found,
+                    Message = Message.UnitTypeAleradyExist,
+                    Data = response
+                };
             }
             catch (Exception ex)
             {
