@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using POS.Core.Models;
+using POS.Core.Models.Unit;
 using POS.Data.Common;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,18 @@ namespace POS.Data.Repository
         public UnitRepository(IDbConnection dbConnection) {
         _dbConnection = dbConnection;
         }
+
+        public async Task<IReadOnlyList<GetUnitModel>> GetUnitMstDetails()
+        {
+            var dp = new DynamicParameters();
+          var result= await  _dbConnection.QueryAsync<GetUnitModel>(
+                sql: StoredProcedure.GetUnitMasterDetails,
+                    param: dp,
+                    commandType: CommandType.StoredProcedure
+                );
+            return result.ToList();
+        }
+
         public async Task<int> UnitMasterInsertDetails(UnitModel unitModel)
         {
             var dp = new DynamicParameters();

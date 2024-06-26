@@ -9,5 +9,6 @@ namespace POS.Data.Common
     public class StoredProcedure
     {
         public const string UnitMasterInsertDetails = "UnitMasterInsertDetails";
+        public const string GetUnitMasterDetails = "GetUnitMasterDetails";
     }
 }

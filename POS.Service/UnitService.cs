@@ -1,4 +1,5 @@
 ﻿using POS.Core.Models;
+using POS.Core.Models.Unit;
 using POS.Data.Repository;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,12 @@ namespace POS.Service
             _unitRepository = unitRepository;
 
         }
+
+        public async Task<IReadOnlyList<GetUnitModel>> GetUnitMstDetails()
+        {
+            return await _unitRepository.GetUnitMstDetails();
+        }
+
         public async Task<int> UnitMasterInsertDetails(UnitModel unitModel)
         {
           return await _unitRepository.UnitMasterInsertDetails(unitModel);
