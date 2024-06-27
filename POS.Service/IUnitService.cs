@@ -12,5 +12,6 @@ namespace POS.Service
     {
         Task<int> UnitMasterInsertDetails(UnitModel unitModel);
         Task<IReadOnlyList<GetUnitModel>> GetUnitMstDetails();
+        Task<bool> UnitMasterUpdateDetails(UpdateUnitModel updateUnitModel);
     }
 }
