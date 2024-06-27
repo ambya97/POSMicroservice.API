@@ -22,7 +22,7 @@ namespace POS.Data.Repository
         {
             var dp = new DynamicParameters();
           var result= await  _dbConnection.QueryAsync<GetUnitModel>(
-                sql: StoredProcedure.GetUnitMasterDetails,
+                sql: StoredProcedure.GetUnitMstDetails,
                     param: dp,
                     commandType: CommandType.StoredProcedure
                 );
@@ -40,6 +40,18 @@ namespace POS.Data.Repository
 
   
             return userInfoModel;
+        }
+
+        public async Task<bool> UnitMasterUpdateDetails(UpdateUnitModel updateUnitModel)
+        {
+            var dp = new DynamicParameters();
+            dp.Add("@UnitId", updateUnitModel.UnitId);
+            dp.Add("@UnitName", updateUnitModel.UnitName);
+            var updateInfoModel = await _dbConnection.QueryFirstOrDefaultAsync<bool>(
+                   sql: StoredProcedure.UnitUpdateDetails,
+                   param: dp,
+                   commandType: CommandType.StoredProcedure);
+            return updateInfoModel;
         }
     }
 }

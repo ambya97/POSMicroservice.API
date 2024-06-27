@@ -5,6 +5,7 @@ using POS.Business;
 using POS.Core.Common;
 using POS.Core.Models;
 using POS.Core.Models.Result;
+using POS.Core.Models.Unit;
 using System.Net;
 
 namespace POS.API.Controllers
@@ -54,6 +55,7 @@ namespace POS.API.Controllers
                 };
             }
         }
+
         [HttpGet("GetUnitMstDetails")]
         public async Task<ResultModel> GetUnitMstDetails()
         {
@@ -66,6 +68,42 @@ namespace POS.API.Controllers
                     Message = Message.UnitTypeAleradyExist,
                     Data = response
                 };
+            }
+            catch (Exception ex)
+            {
+                return new ResultModel()
+                {
+                    Code = HttpStatusCode.InternalServerError,
+                    Message = ex.Message,
+                    Data = string.Empty
+                };
+            }
+        }
+
+        [HttpPut("UnitMasterUpdateDetails")]
+        public async Task<ResultModel> UnitMasterUpdateDetails([FromBody] UpdateUnitModel updateUnitModel)
+        {
+            try
+            {
+                bool responseid = await _unitManager.UnitMasterUpdateDetails(updateUnitModel);
+                if (responseid == true)
+                {
+                    return new ResultModel()
+                    {
+                        Code = HttpStatusCode.OK,
+                        Message = Message.CommonUpdateMessage,
+                        Data = responseid
+                    };
+                }
+                else
+                {
+                    return new ResultModel()
+                    {
+                        Code = HttpStatusCode.OK,
+                        Message = Message.UnitTypeNotExist,
+                        Data = responseid
+                    };
+                }
             }
             catch (Exception ex)
             {
