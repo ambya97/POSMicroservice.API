@@ -10,6 +10,7 @@ namespace POS.Core.Common
     {
         public const string CommonInsertMessage = "Insert Successfully";
         public const string CommonUpdateMessage = "Update Successfully";
+        public const string CommonDeleteMessage = "Delete Successfully";
         public const string UnitTypeAleradyExist = "The Unit Type Already Exists";
         public const string UnitTypeNotExist = "The Unit Type Not Exists";
     }
