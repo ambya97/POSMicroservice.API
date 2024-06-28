@@ -29,6 +29,18 @@ namespace POS.Data.Repository
             return result.ToList();
         }
 
+        public async Task<bool> UnitMasterDeleteDetails(UpdateUnitModel updateUnitModel)
+        {
+            var dp = new DynamicParameters();
+            dp.Add("@UnitId", updateUnitModel.UnitId);
+            dp.Add("@UnitName", updateUnitModel.UnitName);
+            return await _dbConnection.QueryFirstOrDefaultAsync<bool>(
+                   sql: StoredProcedure.UnitMstDeleteDetails,
+                   param: dp,
+                   commandType: CommandType.StoredProcedure);
+      
+        }
+
         public async Task<int> UnitMasterInsertDetails(UnitModel unitModel)
         {
             var dp = new DynamicParameters();
@@ -37,8 +49,6 @@ namespace POS.Data.Repository
                     sql: StoredProcedure.UnitMasterInsertDetails,
                     param: dp,
                     commandType: CommandType.StoredProcedure);
-
-  
             return userInfoModel;
         }
 

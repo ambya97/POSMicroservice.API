@@ -99,7 +99,43 @@ namespace POS.API.Controllers
                 {
                     return new ResultModel()
                     {
+                        Code = HttpStatusCode.NotFound,
+                        Message = Message.UnitTypeNotExist,
+                        Data = responseid
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new ResultModel()
+                {
+                    Code = HttpStatusCode.InternalServerError,
+                    Message = ex.Message,
+                    Data = string.Empty
+                };
+            }
+        }
+
+        [HttpDelete("UnitMasterDeleteDetails")]
+        public async Task<ResultModel> UnitMasterDeleteDetails([FromBody] UpdateUnitModel updateUnitModel)
+        {
+            try
+            {
+                bool responseid = await _unitManager.UnitMasterDeleteDetails(updateUnitModel);
+                if (responseid == true)
+                {
+                    return new ResultModel()
+                    {
                         Code = HttpStatusCode.OK,
+                        Message = Message.CommonDeleteMessage,
+                        Data = responseid
+                    };
+                }
+                else
+                {
+                    return new ResultModel()
+                    {
+                        Code = HttpStatusCode.NotFound,
                         Message = Message.UnitTypeNotExist,
                         Data = responseid
                     };

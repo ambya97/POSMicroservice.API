@@ -21,6 +21,11 @@ namespace POS.Business
             return await _unitService.GetUnitMstDetails();
         }
 
+        public async Task<bool> UnitMasterDeleteDetails(UpdateUnitModel updateUnitModel)
+        {
+            return await _unitService.UnitMasterDeleteDetails(updateUnitModel);
+        }
+
         public async Task<int> UnitMasterInsertDetails(UnitModel unitModel)
         {
             return await _unitService.UnitMasterInsertDetails(unitModel);
