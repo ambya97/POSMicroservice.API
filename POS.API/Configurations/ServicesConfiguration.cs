@@ -18,6 +18,12 @@ namespace POS.API.Configurations
             services.AddScoped<IUnitService, UnitService>();
             services.AddScoped<IUnitRepository, UnitRepository>();
             #endregion
+
+            #region Brand
+            services.AddScoped<IBrandManager, BrandManager>();
+            services.AddScoped<IBrandService, BrandService>();
+            services.AddScoped<IBrandRepository, BrandRepository>();
+            #endregion
         }
     }
 }

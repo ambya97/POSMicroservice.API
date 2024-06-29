@@ -10,9 +10,13 @@ namespace POS.Data
     public class UnitOfWork : IUnitOfWork
     {
         public IUnitRepository unitRepository { get; }
-        public UnitOfWork(IUnitRepository _unitRepository)
+
+        public IBrandRepository brandRepository { get; }
+
+        public UnitOfWork(IUnitRepository _unitRepository, IBrandRepository _brandRepository)
         {
             unitRepository = _unitRepository;
+            brandRepository = _brandRepository;
         }
 
     }
