@@ -10,5 +10,6 @@ namespace POS.Data
     public interface IUnitOfWork
     {
         IUnitRepository unitRepository { get; }
+        IBrandRepository brandRepository { get; }
     }
 }
