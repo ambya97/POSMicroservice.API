@@ -13,5 +13,7 @@ namespace POS.Core.Common
         public const string CommonDeleteMessage = "Delete Successfully";
         public const string UnitTypeAleradyExist = "The Unit Type Already Exists";
         public const string UnitTypeNotExist = "The Unit Type Not Exists";
+        public const string CommonFileUploadMsg = "No file selected";
+        public const string CommonInvalidfiletype = "Invalid file type";
     }
 }
