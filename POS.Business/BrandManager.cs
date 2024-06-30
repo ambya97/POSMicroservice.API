@@ -1,4 +1,5 @@
 ﻿using POS.Core.Models.Brands;
+using POS.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +10,15 @@ namespace POS.Business
 {
     public class BrandManager : IBrandManager
     {
-        private readonly IBrandManager _brandManager;
-        public BrandManager(IBrandManager brandManager) 
-        { 
-         _brandManager = brandManager;
+        private readonly IBrandService _brandService;
+        public BrandManager(IBrandService brandService) 
+        {
+            _brandService = brandService;
         }
         public async Task<int> BrandMasterInsertDetails(BrandInsertModel brandInsertModel)
         {
-            return await _brandManager.BrandMasterInsertDetails(brandInsertModel);
+
+            return await _brandService.BrandMasterInsertDetails(brandInsertModel);
         }
     }
 }

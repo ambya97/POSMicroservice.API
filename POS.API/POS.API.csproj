@@ -16,4 +16,8 @@
     <ProjectReference Include="..\POS.Core\POS.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Uploaded\" />
+  </ItemGroup>
+
 </Project>

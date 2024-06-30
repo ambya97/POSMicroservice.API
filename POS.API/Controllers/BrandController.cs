@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using POS.Business;
 using POS.Core.Common;
 using POS.Core.Models.Brands;
@@ -20,10 +21,34 @@ namespace POS.API.Controllers
             _brandManager = brandManager;
         }
         [HttpPost("BrandMasterInsertDetails")]
-        public async Task<ResultModel> BrandMasterInsertDetails([FromBody] BrandInsertModel brandInsertModel)
+        public async Task<ResultModel> BrandMasterInsertDetails([FromForm] BrandInsertModel brandInsertModel)
         {
             try
             {
+                if (brandInsertModel.file == null || brandInsertModel.file.Length ==0)
+                {
+                    return new ResultModel()
+                    {
+                        Code = HttpStatusCode.BadRequest,
+                        Message = Message.CommonFileUploadMsg,
+                        Data = string.Empty
+                    };
+                }
+                var extension = Path.GetExtension(brandInsertModel.file.FileName).ToLowerInvariant();
+                if (string.IsNullOrEmpty(extension) ||
+                    (extension != ".png" && extension != ".jpg" && extension != ".jpeg"))
+                  {
+                    return new ResultModel()
+                    {
+                        Code = HttpStatusCode.BadRequest,
+                        Message = Message.CommonInvalidfiletype,
+                        Data = string.Empty
+                    };
+                }
+                var newFileName = Path.GetRandomFileName() + extension;
+                var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "Uploaded");
+                var filePath = Path.Combine(folderPath, newFileName);
+                brandInsertModel.BrandImagePath = filePath;
                 int responseid = await _brandManager.BrandMasterInsertDetails(brandInsertModel);
                 if (responseid == 0)
                 {
