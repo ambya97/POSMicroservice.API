@@ -64,8 +64,8 @@ namespace POS.API.Controllers
                 var response =await _unitManager.GetUnitMstDetails();
                 return new ResultModel()
                 {
-                    Code = HttpStatusCode.Found,
-                    Message = Message.UnitTypeAleradyExist,
+                    Code = HttpStatusCode.OK,
+                    Message = Message.CommonGetMessage,
                     Data = response
                 };
             }

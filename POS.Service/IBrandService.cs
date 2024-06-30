@@ -10,5 +10,6 @@ namespace POS.Service
     public interface IBrandService
     {
         Task<int> BrandMasterInsertDetails(BrandInsertModel brandInsertModel);
+        Task<IReadOnlyList<GetBrandModel>> GetBrandMstDetails();
     }
 }

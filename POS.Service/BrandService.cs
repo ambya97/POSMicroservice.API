@@ -19,5 +19,10 @@ namespace POS.Service
         {
             return await _brandRepository.BrandMasterInsertDetails(brandInsertModel);
         }
+
+        public async Task<IReadOnlyList<GetBrandModel>> GetBrandMstDetails()
+        {
+          return  await _brandRepository.GetBrandMstDetails();
+        }
     }
 }

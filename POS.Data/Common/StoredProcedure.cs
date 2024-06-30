@@ -13,5 +13,6 @@ namespace POS.Data.Common
         public const string UnitUpdateDetails = "UnitMasterUpdateDetails";
         public const string UnitMstDeleteDetails = "UnitMasterDeleteDetails";
         public const string BrandMstInsertDetails = "BrandMasterInsertDetails";
+        public const string GetBrandMstDetails = "GetBrandMasterDetails";
     }
 }

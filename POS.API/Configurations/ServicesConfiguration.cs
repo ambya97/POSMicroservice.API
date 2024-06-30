@@ -1,4 +1,5 @@
-﻿using POS.Business;
+﻿using POS.API.Helpers;
+using POS.Business;
 using POS.Data;
 using POS.Data.Repository;
 using POS.Service;
@@ -11,6 +12,10 @@ namespace POS.API.Configurations
         {
             #region Database 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            #endregion
+
+            #region FileUploadHelper 
+            services.AddScoped<IFileUploadHelper,FileUploadHelper>();
             #endregion
 
             #region Brand

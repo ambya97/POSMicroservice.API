@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using POS.Core.Models;
 using POS.Core.Models.Brands;
+using POS.Core.Models.Unit;
 using POS.Data.Common;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,17 @@ namespace POS.Data.Repository
                     param: dp,
                     commandType: CommandType.StoredProcedure);
             return BrandId;
+        }
+
+        public async Task<IReadOnlyList<GetBrandModel>> GetBrandMstDetails()
+        {
+            var dp = new DynamicParameters();
+            var BrandList = await _dbConnection.QueryAsync<GetBrandModel>(
+                  sql: StoredProcedure.GetBrandMstDetails,
+                      param: dp,
+                      commandType: CommandType.StoredProcedure
+                  );
+            return BrandList.ToList();
         }
     }
 }

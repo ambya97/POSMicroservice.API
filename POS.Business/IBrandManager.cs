@@ -10,5 +10,6 @@ namespace POS.Business
     public interface IBrandManager
     {
         Task<int> BrandMasterInsertDetails(BrandInsertModel brandInsertModel);
+        Task<IReadOnlyList<GetBrandModel>> GetBrandMstDetails();
     }
 }
