@@ -6,6 +6,7 @@ using POS.Business;
 using POS.Core.Common;
 using POS.Core.Models.Brands;
 using POS.Core.Models.Result;
+using POS.Core.Models.Unit;
 using System.Net;
 
 namespace POS.API.Controllers
@@ -102,6 +103,41 @@ namespace POS.API.Controllers
                     Message = Message.CommonGetMessage,
                     Data = response
                 };
+            }
+            catch (Exception ex)
+            {
+                return new ResultModel()
+                {
+                    Code = HttpStatusCode.InternalServerError,
+                    Message = ex.Message,
+                    Data = string.Empty
+                };
+            }
+        }
+        [HttpDelete("BrandMasterDeleteDetails")]
+        public async Task<ResultModel> BrandMasterDeleteDetails([FromBody] UpdateBrandModel updateBrandModel)
+        {
+            try
+            {
+                bool DeleteStatus = await _brandManager.BrandMasterDeleteDetails(updateBrandModel);
+                if (DeleteStatus == true)
+                {
+                    return new ResultModel()
+                    {
+                        Code = HttpStatusCode.OK,
+                        Message = Message.CommonDeleteMessage,
+                        Data = DeleteStatus
+                    };
+                }
+                else
+                {
+                    return new ResultModel()
+                    {
+                        Code = HttpStatusCode.NotFound,
+                        Message = Message.BrandTypeNotExist,
+                        Data = DeleteStatus
+                    };
+                }
             }
             catch (Exception ex)
             {
