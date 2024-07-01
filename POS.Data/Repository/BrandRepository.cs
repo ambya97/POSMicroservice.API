@@ -19,6 +19,18 @@ namespace POS.Data.Repository
         {
             _dbConnection = dbConnection;
         }
+
+        public async Task<bool> BrandMasterDeleteDetails(UpdateBrandModel updateBrandModel)
+        {
+            var dp = new DynamicParameters();
+            dp.Add("@BrandId", updateBrandModel.BrandId);
+            dp.Add("@BrandName", updateBrandModel.BrandName);
+            return await _dbConnection.QueryFirstOrDefaultAsync<bool>(
+                   sql: StoredProcedure.BrandMstDeleteDetails,
+                   param: dp,
+                   commandType: CommandType.StoredProcedure);
+        }
+
         public async Task<int> BrandMasterInsertDetails(BrandInsertModel brandInsertModel)
         {
             var dp = new DynamicParameters();
