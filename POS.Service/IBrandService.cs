@@ -1,4 +1,5 @@
 ﻿using POS.Core.Models.Brands;
+using POS.Core.Models.Unit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace POS.Service
     {
         Task<int> BrandMasterInsertDetails(BrandInsertModel brandInsertModel);
         Task<IReadOnlyList<GetBrandModel>> GetBrandMstDetails();
-        Task<bool> BrandMasterDeleteDetails(UpdateBrandModel updateBrandModel);
+        Task<bool> BrandMasterUpdateDetails(UpdateBrandModel updateBrandModel);
+        Task<bool> BrandMasterDeleteDetails(DeleteBrandModel deleteBrandModel);
     }
 }

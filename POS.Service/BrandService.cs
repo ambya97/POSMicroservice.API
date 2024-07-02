@@ -16,14 +16,19 @@ namespace POS.Service
             _brandRepository = brandRepository;
         }
 
-        public async Task<bool> BrandMasterDeleteDetails(UpdateBrandModel updateBrandModel)
+        public async Task<bool> BrandMasterDeleteDetails(DeleteBrandModel deleteBrandModel)
         {
-            return await _brandRepository.BrandMasterDeleteDetails(updateBrandModel);
+            return await _brandRepository.BrandMasterDeleteDetails(deleteBrandModel);
         }
 
         public async Task<int> BrandMasterInsertDetails(BrandInsertModel brandInsertModel)
         {
             return await _brandRepository.BrandMasterInsertDetails(brandInsertModel);
+        }
+
+        public async Task<bool> BrandMasterUpdateDetails(UpdateBrandModel updateBrandModel)
+        {
+            return await _brandRepository.BrandMasterUpdateDetails(updateBrandModel);
         }
 
         public async Task<IReadOnlyList<GetBrandModel>> GetBrandMstDetails()

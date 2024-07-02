@@ -16,15 +16,20 @@ namespace POS.Business
             _brandService = brandService;
         }
 
-        public async Task<bool> BrandMasterDeleteDetails(UpdateBrandModel updateBrandModel)
+        public async Task<bool> BrandMasterDeleteDetails(DeleteBrandModel deleteBrandModel)
         {
-            return await _brandService.BrandMasterDeleteDetails(updateBrandModel);
+            return await _brandService.BrandMasterDeleteDetails(deleteBrandModel);
         }
 
         public async Task<int> BrandMasterInsertDetails(BrandInsertModel brandInsertModel)
         {
 
             return await _brandService.BrandMasterInsertDetails(brandInsertModel);
+        }
+
+        public async Task<bool> BrandMasterUpdateDetails(UpdateBrandModel updateBrandModel)
+        {
+            return await _brandService.BrandMasterUpdateDetails(updateBrandModel);
         }
 
         public async Task<IReadOnlyList<GetBrandModel>> GetBrandMstDetails()

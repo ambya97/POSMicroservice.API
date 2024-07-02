@@ -20,11 +20,11 @@ namespace POS.Data.Repository
             _dbConnection = dbConnection;
         }
 
-        public async Task<bool> BrandMasterDeleteDetails(UpdateBrandModel updateBrandModel)
+        public async Task<bool> BrandMasterDeleteDetails(DeleteBrandModel deleteBrandModel)
         {
             var dp = new DynamicParameters();
-            dp.Add("@BrandId", updateBrandModel.BrandId);
-            dp.Add("@BrandName", updateBrandModel.BrandName);
+            dp.Add("@BrandId", deleteBrandModel.BrandId);
+            dp.Add("@BrandName", deleteBrandModel.BrandName);
             return await _dbConnection.QueryFirstOrDefaultAsync<bool>(
                    sql: StoredProcedure.BrandMstDeleteDetails,
                    param: dp,
@@ -41,6 +41,19 @@ namespace POS.Data.Repository
                     param: dp,
                     commandType: CommandType.StoredProcedure);
             return BrandId;
+        }
+
+        public async Task<bool> BrandMasterUpdateDetails(UpdateBrandModel updateBrandModel)
+        {
+            var dp= new DynamicParameters();
+            dp.Add("@BrandId", updateBrandModel.BrandId);
+            dp.Add("@BrandName", updateBrandModel.BrandName);
+            dp.Add("@BrandImagePath", updateBrandModel.BrandImagePath);
+            return await _dbConnection.QueryFirstOrDefaultAsync<bool>(
+                sql: StoredProcedure.BrandMstUpdateDetails,
+                param: dp,
+                commandType: CommandType.StoredProcedure
+                );
         }
 
         public async Task<IReadOnlyList<GetBrandModel>> GetBrandMstDetails()

@@ -13,6 +13,7 @@ namespace POS.Data.Repository
     {
         Task<int> BrandMasterInsertDetails(BrandInsertModel brandInsertModel);
         Task<IReadOnlyList<GetBrandModel>> GetBrandMstDetails();
-        Task<bool> BrandMasterDeleteDetails(UpdateBrandModel updateBrandModel);
+        Task<bool> BrandMasterUpdateDetails(UpdateBrandModel updateBrandModel);
+        Task<bool> BrandMasterDeleteDetails(DeleteBrandModel deleteBrandModel);
     }
 }
