@@ -91,6 +91,75 @@ namespace POS.API.Controllers
                 };
             }
         }
+
+        [HttpPost("BrandMasterUpdateDetails")]
+        public async Task<ResultModel> BrandMasterUpdateDetails([FromForm] UpdateBrandModel updateBrandModel)
+        {
+            try
+            {
+                if (updateBrandModel.file == null || updateBrandModel.file.Length == 0)
+                {
+                    return new ResultModel()
+                    {
+                        Code = HttpStatusCode.BadRequest,
+                        Message = Message.CommonFileUploadMsg,
+                        Data = string.Empty
+                    };
+                }
+                var extension = Path.GetExtension(updateBrandModel.file.FileName).ToLowerInvariant();
+                if (string.IsNullOrEmpty(extension) ||
+                    (extension != ".png" && extension != ".jpg" && extension != ".jpeg"))
+                {
+                    return new ResultModel()
+                    {
+                        Code = HttpStatusCode.BadRequest,
+                        Message = Message.CommonInvalidfiletype,
+                        Data = string.Empty
+                    };
+                }
+                string originalFileName = Path.GetFileName(updateBrandModel.file.FileName);
+                string physicalFileName = _fileUploadHelper.GetUniqueFileName(originalFileName);
+                string physicalFolderPath = _fileUploadHelper.GetUsersFolderPath(true);
+                string physicalFileFullPath = Path.Combine(physicalFolderPath, physicalFileName);
+                if (!Directory.Exists(physicalFolderPath))
+                {
+                    Directory.CreateDirectory(physicalFolderPath);
+                }
+                using var stream = System.IO.File.Create(physicalFileFullPath);
+                // Upload File
+                await updateBrandModel.file.CopyToAsync(stream);
+                updateBrandModel.BrandImagePath = physicalFileFullPath;
+                bool resultUpdateID = await _brandManager.BrandMasterUpdateDetails(updateBrandModel);
+                if (resultUpdateID == true)
+                {
+                    return new ResultModel()
+                    {
+                        Code = HttpStatusCode.Found,
+                        Message = Message.CommonUpdateMessage,
+                        Data = resultUpdateID
+                    };
+                }
+                else
+                {
+                    return new ResultModel()
+                    {
+                        Code = HttpStatusCode.OK,
+                        Message = Message.BrandTypeNotExist,
+                        Data = resultUpdateID
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new ResultModel()
+                {
+                    Code = HttpStatusCode.InternalServerError,
+                    Message = ex.Message,
+                    Data = string.Empty
+                };
+            }
+        }
+
         [HttpGet("GetBrandMstDetails")]
         public async Task<ResultModel> GetBrandMstDetails()
         {
@@ -115,11 +184,11 @@ namespace POS.API.Controllers
             }
         }
         [HttpDelete("BrandMasterDeleteDetails")]
-        public async Task<ResultModel> BrandMasterDeleteDetails([FromBody] UpdateBrandModel updateBrandModel)
+        public async Task<ResultModel> BrandMasterDeleteDetails([FromBody] DeleteBrandModel deleteBrandModel)
         {
             try
             {
-                bool DeleteStatus = await _brandManager.BrandMasterDeleteDetails(updateBrandModel);
+                bool DeleteStatus = await _brandManager.BrandMasterDeleteDetails(deleteBrandModel);
                 if (DeleteStatus == true)
                 {
                     return new ResultModel()
