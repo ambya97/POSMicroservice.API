@@ -13,10 +13,13 @@ namespace POS.Data
 
         public IBrandRepository brandRepository { get; }
 
-        public UnitOfWork(IUnitRepository _unitRepository, IBrandRepository _brandRepository)
+        public IRegister registerRepository { get; }
+
+        public UnitOfWork(IUnitRepository _unitRepository, IBrandRepository _brandRepository, IRegister _registerRepository)
         {
             unitRepository = _unitRepository;
             brandRepository = _brandRepository;
+            registerRepository = _registerRepository;
         }
 
     }

@@ -11,5 +11,6 @@ namespace POS.Data
     {
         IUnitRepository unitRepository { get; }
         IBrandRepository brandRepository { get; }
+        IRegister registerRepository { get; }
     }
 }

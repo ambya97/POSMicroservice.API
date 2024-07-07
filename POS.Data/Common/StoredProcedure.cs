@@ -16,5 +16,8 @@ namespace POS.Data.Common
         public const string GetBrandMstDetails = "GetBrandMasterDetails";
         public const string BrandMstDeleteDetails = "BrandMasterDeleteDetails";
         public const string BrandMstUpdateDetails = "BrandMasterUpdateDetails";
+        public const string FindByEmailSP = "FindByEmailDetails";
+        public const string InsertRegisterDts = "InsertRegisterDetails";
+        public const string InsertUpdateAddUserRoleDts = "InsertUpdateAddUserRoleDetails";
     }
 }
