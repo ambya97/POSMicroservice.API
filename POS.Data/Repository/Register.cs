@@ -26,7 +26,7 @@ namespace POS.Data.Repository
         {
             
             var dp = new DynamicParameters();
-            dp.Add("@BrandId", Email);
+            dp.Add("@Email", Email);
             var isExistsUsermodel = await _dbConnection.QueryFirstOrDefaultAsync<GetRegisterModel>(
                    sql: StoredProcedure.FindByEmailSP,
                    param: dp,

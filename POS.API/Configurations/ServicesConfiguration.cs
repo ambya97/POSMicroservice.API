@@ -29,8 +29,13 @@ namespace POS.API.Configurations
             services.AddScoped<IUnitService, UnitService>();
             services.AddScoped<IUnitRepository, UnitRepository>();
             #endregion
+            #region Register
+            services.AddScoped<IRegisterManager, RegisterManager>();
+            services.AddScoped<IRegisterService, RegisterService>();
+            services.AddScoped<IRegister, Register>();
+            #endregion
 
-            
+
         }
     }
 }
