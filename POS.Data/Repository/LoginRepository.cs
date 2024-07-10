@@ -1,7 +1,9 @@
 ﻿using Dapper;
+using POS.Core.Common;
 using POS.Core.Models.Login;
 using POS.Core.Models.Register;
 using POS.Core.Models.Result;
+using POS.Core.Models.Roleclaims;
 using POS.Data.Common;
 using System;
 using System.Collections.Generic;
@@ -31,9 +33,16 @@ namespace POS.Data.Repository
             return isExistsUsermodel;
         }
 
-        public Task<AuthServiceResponseDto> LoginAsync(LoginDto loginDto)
+       
+        public async Task<GetRoleModel> GetRolesAsync(int UserID)
         {
-            throw new NotImplementedException();
+            var dp = new DynamicParameters();
+            dp.Add("@UserId", UserID);
+            var Roletype = await _dbConnection.QueryFirstOrDefaultAsync<GetRoleModel>(
+                   sql: StoredProcedure.GetUserRoleDts,
+                   param: dp,
+                   commandType: CommandType.StoredProcedure);
+            return Roletype; ;
         }
     }
 }
