@@ -1,5 +1,6 @@
 ﻿using POS.API.Helpers;
 using POS.Business;
+using POS.Business.Authentication;
 using POS.Data;
 using POS.Data.Repository;
 using POS.Service;
@@ -35,6 +36,14 @@ namespace POS.API.Configurations
             services.AddScoped<IRegister, Register>();
             #endregion
 
+            #region Login
+            services.AddScoped<ILoginManager, LoginManager>();
+            services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<ILoginRepository, LoginRepository>();
+            #endregion
+            #region Auth
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            #endregion
 
         }
     }

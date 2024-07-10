@@ -8,12 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace POS.Data.Repository
+namespace POS.Business
 {
-    public interface ILoginRepository
+    public interface ILoginManager
     {
-        Task<GetRegisterModel> FindByEmailDetails(string Email);
-       // Task<AuthServiceResponseDto> LoginAsync(LoginDto loginDto);
-        Task<GetRoleModel> GetRolesAsync(int UserID);
+        
+        Task<AuthServiceResponseDto> LoginAsync(LoginDto loginDto);
+        
     }
 }

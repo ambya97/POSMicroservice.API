@@ -19,5 +19,6 @@ namespace POS.Data.Common
         public const string FindByEmailSP = "FindByEmailDetails";
         public const string InsertRegisterDts = "InsertRegisterDetails";
         public const string InsertUpdateAddUserRoleDts = "InsertUpdateAddUserRoleDetails";
+        public const string GetUserRoleDts = "GetUserRoleDetails";
     }
 }
