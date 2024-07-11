@@ -16,7 +16,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IDbConnection>(sp => new SqlConnection(builder.Configuration.GetConnectionString("defaultcon")));
 builder.Services.AddPosServices();
-// Add Authentication and JwtBearer
+// Add Authentication and JwtBearer 
 builder.Services
     .AddAuthentication(options =>
     {
