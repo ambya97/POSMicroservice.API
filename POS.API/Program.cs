@@ -28,7 +28,7 @@ builder.Services
     {
         options.SaveToken = true;
         options.RequireHttpsMetadata = false;
-        options.TokenValidationParameters = new TokenValidationParameters()
+        options.TokenValidationParameters = new TokenValidationParameters() 
         {
             ValidateIssuer = true,
             ValidateAudience = true,
