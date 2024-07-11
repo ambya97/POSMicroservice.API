@@ -42,7 +42,7 @@ namespace POS.Data.Repository
                    sql: StoredProcedure.GetUserRoleDts,
                    param: dp,
                    commandType: CommandType.StoredProcedure);
-            return Roletype; ;
+            return Roletype ;
         }
     }
 }
