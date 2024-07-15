@@ -3,6 +3,7 @@ using POS.Core.Models.Login;
 using POS.Core.Models.Register;
 using POS.Core.Models.Result;
 using POS.Core.Models.Roleclaims;
+using POS.Core.Models.User;
 using POS.Service;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,11 @@ namespace POS.Business
             _loginService = loginService;
             _authenticationService = authenticationService;
         }
-       
+
+        public async Task<UserModel> GetUserById(int userId)
+        {
+            return await _loginService.GetUserById(userId);
+        }
 
         public async Task<AuthServiceResponseDto> LoginAsync(LoginDto loginDto)
         {

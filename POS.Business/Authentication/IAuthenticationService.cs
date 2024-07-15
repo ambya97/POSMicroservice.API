@@ -10,5 +10,6 @@ namespace POS.Business.Authentication
     public interface IAuthenticationService
     {
         string GenerateNewJsonWebToken(List<Claim> claims);
+        string GetUserIdFromToken(string token);
     }
 }
