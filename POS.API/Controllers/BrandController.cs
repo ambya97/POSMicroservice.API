@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using POS.API.Helpers;
 using POS.Business;
 using POS.Core.Common;
+using POS.Core.Enum;
 using POS.Core.Models.Brands;
 using POS.Core.Models.Result;
 using POS.Core.Models.Unit;
@@ -159,7 +161,7 @@ namespace POS.API.Controllers
                 };
             }
         }
-
+        [Authorize(Roles = StaticRoles.ADMIN)]
         [HttpGet("GetBrandMstDetails")]
         public async Task<ResultModel> GetBrandMstDetails()
         {

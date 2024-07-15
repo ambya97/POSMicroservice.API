@@ -1,12 +1,16 @@
 ﻿using Azure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using POS.Business;
 using POS.Core.Common;
+using POS.Core.Enum;
 using POS.Core.Models;
 using POS.Core.Models.Result;
 using POS.Core.Models.Unit;
 using System.Net;
+using System.Security.Claims;
+using static POS.Core.Common.StaticValues;
 
 namespace POS.API.Controllers
 {
@@ -21,6 +25,7 @@ namespace POS.API.Controllers
         {
             _unitManager = unitManager;
         }
+        [Authorize(Roles = StaticRoles.ADMIN)]
         [HttpPost("UnitMasterInsertDetails")]
         public async Task<ResultModel> UnitMasterInsertDetails([FromBody]  UnitModel unitModel)
         {
@@ -55,10 +60,11 @@ namespace POS.API.Controllers
                 };
             }
         }
-
+        [Authorize(Roles = StaticRoles.ADMIN)]
         [HttpGet("GetUnitMstDetails")]
         public async Task<ResultModel> GetUnitMstDetails()
         {
+            int userId = (int)HttpContext.Items[Claims.UserId];
             try
             {
                 var response =await _unitManager.GetUnitMstDetails();
@@ -79,7 +85,7 @@ namespace POS.API.Controllers
                 };
             }
         }
-
+        [Authorize]
         [HttpPut("UnitMasterUpdateDetails")]
         public async Task<ResultModel> UnitMasterUpdateDetails([FromBody] UpdateUnitModel updateUnitModel)
         {
@@ -116,6 +122,7 @@ namespace POS.API.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete("UnitMasterDeleteDetails")]
         public async Task<ResultModel> UnitMasterDeleteDetails([FromBody] UpdateUnitModel updateUnitModel)
         {

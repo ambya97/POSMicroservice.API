@@ -2,6 +2,7 @@
 using POS.Core.Models.Register;
 using POS.Core.Models.Result;
 using POS.Core.Models.Roleclaims;
+using POS.Core.Models.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,6 @@ namespace POS.Data.Repository
         Task<GetRegisterModel> FindByEmailDetails(string Email);
        // Task<AuthServiceResponseDto> LoginAsync(LoginDto loginDto);
         Task<GetRoleModel> GetRolesAsync(int UserID);
+        Task<UserModel> GetUserById(int userId);
     }
 }

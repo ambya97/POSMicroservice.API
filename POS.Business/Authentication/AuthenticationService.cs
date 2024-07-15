@@ -33,5 +33,27 @@ namespace POS.Business.Authentication
 
             return token;
         }
+
+        public string GetUserIdFromToken(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_configuration["JWT:Secret"].ToString());
+            tokenHandler.ValidateToken(token, new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                // set clockskew to zero so tokens expire exactly at token expiration time (instead of 5 minutes later)
+                ClockSkew = TimeSpan.Zero
+            }, out SecurityToken validatedToken);
+
+            var jwtToken = (JwtSecurityToken)validatedToken;
+
+            string userId = jwtToken.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
+            //int.Parse(jwtToken.Claims.First(x => x.Type == ClaimTypes.Email).Value, out int userId);
+
+            return userId;
+        }
     }
 }

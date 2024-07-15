@@ -17,5 +17,6 @@ namespace POS.Core.Common
         public const string BrandTypeNotExist = "The Brand Type Not Exists";
         public const string CommonFileUploadMsg = "No file selected";
         public const string CommonInvalidfiletype = "Invalid file type";
+        public const string UnauthorizedMessage = "Unauthorized";
     }
 }

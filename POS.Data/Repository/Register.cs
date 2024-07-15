@@ -69,7 +69,7 @@ namespace POS.Data.Repository
                     Message = "User Creation Failed"
                 };
             }
-            await AddToRoleAsync(createUserResult, Convert.ToInt32(StaticUserRoles.UserRoles.USER));
+            await AddToRoleAsync(createUserResult, Convert.ToInt32(StaticUserRoles.UserRoles.ADMIN));
             return new AuthServiceResponseDto()
             {
                 IsSucceed = true,

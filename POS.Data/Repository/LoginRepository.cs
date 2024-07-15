@@ -4,6 +4,7 @@ using POS.Core.Models.Login;
 using POS.Core.Models.Register;
 using POS.Core.Models.Result;
 using POS.Core.Models.Roleclaims;
+using POS.Core.Models.User;
 using POS.Data.Common;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,18 @@ namespace POS.Data.Repository
                    param: dp,
                    commandType: CommandType.StoredProcedure);
             return Roletype ;
+        }
+
+        public async Task<UserModel> GetUserById(int userId)
+        {
+            var dp = new DynamicParameters();
+            dp.Add("@UserId", userId);
+
+            var Usermodel= await _dbConnection.QueryFirstOrDefaultAsync<UserModel>(
+                    sql: StoredProcedure.GetUserByIdSP,
+                    param: dp,
+                    commandType: CommandType.StoredProcedure);
+            return Usermodel;
         }
     }
 }
