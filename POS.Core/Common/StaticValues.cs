@@ -10,7 +10,7 @@ namespace POS.Core.Common
     {
         public class Claims
         {
-            public const string UserId = "UserId";
+            public const int UserId = 0;
             public const string UCC = "UCC";
             public const string AuthorizeToken = "AuthorizeToken";
         }

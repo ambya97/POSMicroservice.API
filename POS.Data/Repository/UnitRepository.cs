@@ -45,6 +45,7 @@ namespace POS.Data.Repository
         {
             var dp = new DynamicParameters();
             dp.Add("@UnitName", unitModel.UnitName);
+            dp.Add("@Createdby", unitModel.Createdby);
             var userInfoModel = await _dbConnection.QueryFirstOrDefaultAsync<int>(
                     sql: StoredProcedure.UnitMasterInsertDetails,
                     param: dp,
