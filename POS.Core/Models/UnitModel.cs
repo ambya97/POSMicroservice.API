@@ -12,5 +12,7 @@ namespace POS.Core.Models
         // public int? UnitId { get; set; }
         [Required]
         public string UnitName { get; set; }=string.Empty;
+      
+        public int Createdby { get; set; }
     }
 }

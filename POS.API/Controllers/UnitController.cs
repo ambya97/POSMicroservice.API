@@ -14,6 +14,7 @@ using static POS.Core.Common.StaticValues;
 
 namespace POS.API.Controllers
 {
+    [Authorize(Roles = StaticRoles.ADMIN)]
     [Route("api/[controller]")]
     [ApiController]
     public class UnitController : ControllerBase
@@ -25,12 +26,14 @@ namespace POS.API.Controllers
         {
             _unitManager = unitManager;
         }
-        [Authorize(Roles = StaticRoles.ADMIN)]
+        
         [HttpPost("UnitMasterInsertDetails")]
         public async Task<ResultModel> UnitMasterInsertDetails([FromBody]  UnitModel unitModel)
         {
             try
             {
+                int userId = (int)HttpContext.Items[Claims.UserId];
+                unitModel.Createdby = userId;
                 int responseid = await _unitManager.UnitMasterInsertDetails(unitModel);
                 if (responseid == 0) {
                     return new ResultModel()
@@ -60,11 +63,11 @@ namespace POS.API.Controllers
                 };
             }
         }
-        [Authorize(Roles = StaticRoles.ADMIN)]
+        
         [HttpGet("GetUnitMstDetails")]
         public async Task<ResultModel> GetUnitMstDetails()
         {
-            int userId = (int)HttpContext.Items[Claims.UserId];
+            
             try
             {
                 var response =await _unitManager.GetUnitMstDetails();
@@ -91,6 +94,8 @@ namespace POS.API.Controllers
         {
             try
             {
+                int userId = (int)HttpContext.Items[Claims.UserId];
+                updateUnitModel.Updatedby = userId;
                 bool responseid = await _unitManager.UnitMasterUpdateDetails(updateUnitModel);
                 if (responseid == true)
                 {

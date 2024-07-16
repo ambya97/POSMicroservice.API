@@ -13,6 +13,7 @@ using System.Net;
 
 namespace POS.API.Controllers
 {
+    [Authorize(Roles = StaticRoles.ADMIN)]
     [Route("api/[controller]")]
     [ApiController]
     public class BrandController : ControllerBase

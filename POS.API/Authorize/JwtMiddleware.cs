@@ -54,7 +54,7 @@ namespace POS.API.Authorize
 
                 // attach user to context on successful jwt validation
                 context.Items["User"] = await usersManager.GetUserById(Convert.ToInt32(userId));
-                context.Items[Claims.UserId] = userId;
+                context.Items[Claims.UserId] = Convert.ToInt32(userId);
                 context.Items[Claims.AuthorizeToken] = token;
             }
             catch
