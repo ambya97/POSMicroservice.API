@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using POS.Core.Models.Result;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -17,21 +18,25 @@ namespace POS.Business.Authentication
         {
             _configuration = configuration;
         }
-        public string GenerateNewJsonWebToken(List<Claim> claims)
+        public TokenResponseDto GenerateNewJsonWebToken(List<Claim> claims)
         {
             var authSecret = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
-
+            var expireDate = DateTime.UtcNow.AddMinutes(30);
             var tokenObject = new JwtSecurityToken(
                     issuer: _configuration["JWT:ValidIssuer"],
                     audience: _configuration["JWT:ValidAudience"],
-                    expires: DateTime.Now.AddHours(1),
+                    expires: expireDate,
                     claims: claims,
                     signingCredentials: new SigningCredentials(authSecret, SecurityAlgorithms.HmacSha256)
                 );
 
             string token = new JwtSecurityTokenHandler().WriteToken(tokenObject);
 
-            return token;
+            return new TokenResponseDto()
+            {
+                Token = token,
+                ExpireDate = expireDate
+            };
         }
 
         public string GetUserIdFromToken(string token)

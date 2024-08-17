@@ -56,11 +56,12 @@ namespace POS.Business
                 new Claim("LastName", isExistsUser.LastName),
             };
             authClaims.Add(new Claim(ClaimTypes.Role, UserRole.RoleName));
-            string token= _authenticationService.GenerateNewJsonWebToken(authClaims);
+            var token= _authenticationService.GenerateNewJsonWebToken(authClaims);
             return new AuthServiceResponseDto()
             {
                 IsSucceed = true,
-                Message = token
+                Message = token.Token,
+                ExpireDate=token.ExpireDate,
             };
         }
     }
