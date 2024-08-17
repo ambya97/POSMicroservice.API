@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace POS.Core.Models.Result
 {
-    public class AuthServiceResponseDto
+    public class TokenResponseDto
     {
-        public bool IsSucceed { get; set; }
-        public string Message { get; set; }=string.Empty;
+        public string Token { get; set; }
         public DateTime ExpireDate { get; set; }
     }
 }
